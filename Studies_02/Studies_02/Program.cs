@@ -7,43 +7,41 @@ namespace curso
     {
         static void Main(string[] args)
         {
+            int N = int.Parse(Console.ReadLine());
+            String[] nome = new string[N];
+            int[] idade = new int[N];
+            double[] altura = new double[N];
+            
+            
+            // Leitura dos dados
+            for(int i = 0; i < N; i++)
+            {
+                String[] vet = Console.ReadLine().Split(' ');
+                nome[i] = vet[0];
+                idade[i] = int.Parse(vet[1]);
+                altura[i] = double.Parse(vet[2], CultureInfo.InvariantCulture);
+            }
+            // Calculo da altura media das pessoas
+            double soma = 0.0;
+            for(int i = 0; i < N; i++)
+            {
+                soma += altura[i];
+            }
+            double media = soma / N;
+            Console.WriteLine("Altura média: " + media.ToString("F2", CultureInfo.InvariantCulture));
 
-            int dias, horas, min, seg,
-                dias2, horas2, min2, seg2,
-                w, x, y, z, resto;
+            // Porcentagem de pessoas abaixo de 16 anos
+            int cont = 0;
+            for(int i = 0;i<N; i++)
+            {
+                if (idade[i] < 16)
+                {
+                    cont++;
+                }
+            }
+            double por = (double) cont / N * 100.0;
+            Console.WriteLine("Pessoas com menos de 16 anos: " + por.ToString("F1", CultureInfo.InvariantCulture) + "%");
 
-            string[] vet = Console.ReadLine().Split(' ');
-            dias = int.Parse(vet[1]);
-
-            vet = Console.ReadLine().Split(' ');
-            horas = int.Parse(vet[0]);
-            min = int.Parse(vet[2]);
-            seg = int.Parse(vet[4]);
-
-            vet = Console.ReadLine().Split(' ');
-            dias2 = int.Parse(vet[1]);
-
-            vet = Console.ReadLine().Split(' ');
-            horas2 = int.Parse(vet[0]);
-            min2 = int.Parse(vet[2]);
-            seg2 = int.Parse(vet[4]);
-
-            int inicio = (dias - 1) * 24 * 60 * 60 + horas * 60 * 60 + min * 60 + seg;
-            int fim = (dias2 - 1) * 24 * 60 * 60 + horas2 * 60 * 60 + min2 * 60 + seg2;
-
-            int duracao = fim - inicio;
-
-            w = duracao / (24 * 60 * 60);
-            resto = duracao % (24 * 60 * 60);
-            x = resto / (60 * 60);
-            resto = resto % (60 * 60);
-            y = resto / 60;
-            z = resto % 60;
-
-            Console.WriteLine(w + " dia(s)");
-            Console.WriteLine(x + " hora(s)");
-            Console.WriteLine(y + " minuto(s)");
-            Console.WriteLine(z + " segundo(s)");
 
         }
     }
